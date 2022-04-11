@@ -763,3 +763,17 @@ function fnc__specialcol_(values, context) {
 function fnc_project_color(values, context) {
     return false;
 };
+
+
+
+function exp_evolution_pop_ZE_3rule0_eval_expression(context) {
+    // 
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return null;
+    } else {
+        return null;
+    }
+}
