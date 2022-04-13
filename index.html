@@ -8,6 +8,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -31,13 +33,14 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet.wms.js"></script>
-        <script src="data/ZEOccitanie2020_1.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/ZE_OCCITANIE_pop2019_1.js"></script>
         <script src="data/contour_ZE_Occitanie_2.js"></script>
-        <script src="data/evolution_pop_ZEcopier_3.js"></script>
+        <script src="data/pop2019_3.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[42.095771285428796,-1.9054004910476645],[45.192440226771055,6.562346312650154]]);
+        }).fitBounds([[42.49416439875324,-0.8525284986144573],[44.89359411736427,5.718333926505698]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -55,67 +58,64 @@
             tiled: true,
             info_format: 'text/html',
             opacity: 1,
+            identify: false,
             attribution: '',
         });
         map.addLayer(layer_ReliefVisibleentre18000000et125000_0);
-        function pop_ZEOccitanie2020_1(feature, layer) {
+        function pop_ZE_OCCITANIE_pop2019_1(feature, layer) {
             var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2"><strong>NOM_COM_M</strong><br />' + (feature.properties['NOM_COM_M'] !== null ? autolinker.link(feature.properties['NOM_COM_M'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>INSEE_COM</strong><br />' + (feature.properties['INSEE_COM'] !== null ? autolinker.link(feature.properties['INSEE_COM'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>STATUT</strong><br />' + (feature.properties['STATUT'] !== null ? autolinker.link(feature.properties['STATUT'].toLocaleString()) : '') + '</td>\
-                    </tr>\
                     <tr>\
                         <td colspan="2"><strong>ZE2020</strong><br />' + (feature.properties['ZE2020'] !== null ? autolinker.link(feature.properties['ZE2020'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2"><strong>LIBZE2020</strong><br />' + (feature.properties['LIBZE2020'] !== null ? autolinker.link(feature.properties['LIBZE2020'].toLocaleString()) : '') + '</td>\
                     </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>pop2019</strong><br />' + (feature.properties['pop2019'] !== null ? autolinker.link(feature.properties['pop2019'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>evol_pop</strong><br />' + (feature.properties['evol_pop'] !== null ? autolinker.link(feature.properties['evol_pop'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_ZEOccitanie2020_1_0() {
+        function style_ZE_OCCITANIE_pop2019_1_0() {
             return {
-                pane: 'pane_ZEOccitanie2020_1',
+                pane: 'pane_ZE_OCCITANIE_pop2019_1',
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1.0, 
+                weight: 2.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(141,90,153,0.0)',
+                fillColor: 'rgba(225,89,137,0.0)',
                 interactive: true,
             }
         }
-        map.createPane('pane_ZEOccitanie2020_1');
-        map.getPane('pane_ZEOccitanie2020_1').style.zIndex = 401;
-        map.getPane('pane_ZEOccitanie2020_1').style['mix-blend-mode'] = 'normal';
-        var layer_ZEOccitanie2020_1 = new L.geoJson(json_ZEOccitanie2020_1, {
+        map.createPane('pane_ZE_OCCITANIE_pop2019_1');
+        map.getPane('pane_ZE_OCCITANIE_pop2019_1').style.zIndex = 401;
+        map.getPane('pane_ZE_OCCITANIE_pop2019_1').style['mix-blend-mode'] = 'normal';
+        var layer_ZE_OCCITANIE_pop2019_1 = new L.geoJson(json_ZE_OCCITANIE_pop2019_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_ZEOccitanie2020_1',
-            layerName: 'layer_ZEOccitanie2020_1',
-            pane: 'pane_ZEOccitanie2020_1',
-            onEachFeature: pop_ZEOccitanie2020_1,
-            style: style_ZEOccitanie2020_1_0,
+            dataVar: 'json_ZE_OCCITANIE_pop2019_1',
+            layerName: 'layer_ZE_OCCITANIE_pop2019_1',
+            pane: 'pane_ZE_OCCITANIE_pop2019_1',
+            onEachFeature: pop_ZE_OCCITANIE_pop2019_1,
+            style: style_ZE_OCCITANIE_pop2019_1_0,
         });
-        bounds_group.addLayer(layer_ZEOccitanie2020_1);
-        map.addLayer(layer_ZEOccitanie2020_1);
+        bounds_group.addLayer(layer_ZE_OCCITANIE_pop2019_1);
+        map.addLayer(layer_ZE_OCCITANIE_pop2019_1);
         function pop_contour_ZE_Occitanie_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">NOM_COM</th>\
-                        <td>' + (feature.properties['NOM_COM'] !== null ? autolinker.link(feature.properties['NOM_COM'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['NOM_COM'] !== null ? autolinker.link(feature.properties['NOM_COM'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['NOM_COM_M'] !== null ? autolinker.link(feature.properties['NOM_COM_M'].toLocaleString()) : '') + '</td>\
@@ -377,37 +377,23 @@
             style: style_contour_ZE_Occitanie_2_0,
         });
         bounds_group.addLayer(layer_contour_ZE_Occitanie_2);
-        function pop_evolution_pop_ZEcopier_3(feature, layer) {
+        function pop_pop2019_3(feature, layer) {
             var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2"><strong>NOM_COM_M</strong><br />' + (feature.properties['NOM_COM_M'] !== null ? autolinker.link(feature.properties['NOM_COM_M'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>INSEE_COM</strong><br />' + (feature.properties['INSEE_COM'] !== null ? autolinker.link(feature.properties['INSEE_COM'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>STATUT</strong><br />' + (feature.properties['STATUT'] !== null ? autolinker.link(feature.properties['STATUT'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>ZE2020</strong><br />' + (feature.properties['ZE2020'] !== null ? autolinker.link(feature.properties['ZE2020'].toLocaleString()) : '') + '</td>\
-                    </tr>\
                     <tr>\
                         <td colspan="2"><strong>LIBZE2020</strong><br />' + (feature.properties['LIBZE2020'] !== null ? autolinker.link(feature.properties['LIBZE2020'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2"><strong>pop2019</strong><br />' + (feature.properties['pop2019'] !== null ? autolinker.link(feature.properties['pop2019'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>evol_pop</strong><br />' + (feature.properties['evol_pop'] !== null ? autolinker.link(feature.properties['evol_pop'].toLocaleString()) : '') + '</td>\
-                    </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_evolution_pop_ZEcopier_3_0() {
-            return {
-                pane: 'pane_evolution_pop_ZEcopier_3',
-                radius: 8.0,
+        function style_pop2019_3_0(feature) {
+            if (feature.properties['pop2019'] >= 54209.000000 && feature.properties['pop2019'] <= 500000.000000 ) {
+                return {
+                pane: 'pane_pop2019_3',
+                radius: 10.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -416,53 +402,90 @@
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(192,16,13,1.0)',
+                fillColor: 'rgba(249,228,35,1.0)',
                 interactive: true,
             }
+            }
+            if (feature.properties['pop2019'] >= 500000.000000 && feature.properties['pop2019'] <= 1000000.000000 ) {
+                return {
+                pane: 'pane_pop2019_3',
+                radius: 22.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,228,35,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['pop2019'] >= 1000000.000000 && feature.properties['pop2019'] <= 1300650.000000 ) {
+                return {
+                pane: 'pane_pop2019_3',
+                radius: 34.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,228,35,1.0)',
+                interactive: true,
+            }
+            }
         }
-        map.createPane('pane_evolution_pop_ZEcopier_3');
-        map.getPane('pane_evolution_pop_ZEcopier_3').style.zIndex = 403;
-        map.getPane('pane_evolution_pop_ZEcopier_3').style['mix-blend-mode'] = 'normal';
-        var layer_evolution_pop_ZEcopier_3 = new L.geoJson(json_evolution_pop_ZEcopier_3, {
+        map.createPane('pane_pop2019_3');
+        map.getPane('pane_pop2019_3').style.zIndex = 403;
+        map.getPane('pane_pop2019_3').style['mix-blend-mode'] = 'normal';
+        var layer_pop2019_3 = new L.geoJson(json_pop2019_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_evolution_pop_ZEcopier_3',
-            layerName: 'layer_evolution_pop_ZEcopier_3',
-            pane: 'pane_evolution_pop_ZEcopier_3',
-            onEachFeature: pop_evolution_pop_ZEcopier_3,
+            dataVar: 'json_pop2019_3',
+            layerName: 'layer_pop2019_3',
+            pane: 'pane_pop2019_3',
+            onEachFeature: pop_pop2019_3,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_evolution_pop_ZEcopier_3_0(feature));
+                return L.circleMarker(latlng, style_pop2019_3_0(feature));
             },
         });
-        bounds_group.addLayer(layer_evolution_pop_ZEcopier_3);
-        map.addLayer(layer_evolution_pop_ZEcopier_3);
+        var cluster_pop2019_3 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_pop2019_3.addLayer(layer_pop2019_3);
+
+        bounds_group.addLayer(layer_pop2019_3);
+        cluster_pop2019_3.addTo(map);
         setBounds();
         var i = 0;
-        layer_ZEOccitanie2020_1.eachLayer(function(layer) {
+        layer_ZE_OCCITANIE_pop2019_1.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['NOM_COM_M'] !== null?String('<div style="color: #ffffff; font-size: 10pt; font-weight: bold; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['NOM_COM_M']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ZEOccitanie2020_1'});
+            layer.bindTooltip((layer.feature.properties['LIBZE2020'] !== null?String('<div style="color: #ffffff; font-size: 12pt; font-weight: bold; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['LIBZE2020']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_ZE_OCCITANIE_pop2019_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_ZEOccitanie2020_1]);
+        resetLabels([layer_ZE_OCCITANIE_pop2019_1,layer_contour_ZE_Occitanie_2]);
         map.on("zoomend", function(){
-            resetLabels([layer_ZEOccitanie2020_1]);
+            resetLabels([layer_ZE_OCCITANIE_pop2019_1,layer_contour_ZE_Occitanie_2]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_ZEOccitanie2020_1]);
+            resetLabels([layer_ZE_OCCITANIE_pop2019_1,layer_contour_ZE_Occitanie_2]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_ZEOccitanie2020_1]);
+            resetLabels([layer_ZE_OCCITANIE_pop2019_1,layer_contour_ZE_Occitanie_2]);
         });
         </script>
     </body>
