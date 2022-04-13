@@ -80,8 +80,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_ZE_OCCITANIE_pop2019_1_0() {
-            return {
+        function style_ZE_OCCITANIE_pop2019_1_0(feature) {
+            if (feature.properties['evol_pop'] >= -0.300000 && feature.properties['evol_pop'] <= 0.100000 ) {
+                return {
                 pane: 'pane_ZE_OCCITANIE_pop2019_1',
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
@@ -91,8 +92,54 @@
                 weight: 2.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(225,89,137,0.0)',
+                fillColor: 'rgba(255,210,209,1.0)',
                 interactive: true,
+            }
+            }
+            if (feature.properties['evol_pop'] >= 0.100000 && feature.properties['evol_pop'] <= 0.300000 ) {
+                return {
+                pane: 'pane_ZE_OCCITANIE_pop2019_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(242,154,157,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['evol_pop'] >= 0.300000 && feature.properties['evol_pop'] <= 0.550000 ) {
+                return {
+                pane: 'pane_ZE_OCCITANIE_pop2019_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,98,104,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['evol_pop'] >= 0.550000 && feature.properties['evol_pop'] <= 1.500000 ) {
+                return {
+                pane: 'pane_ZE_OCCITANIE_pop2019_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,43,51,1.0)',
+                interactive: true,
+            }
             }
         }
         map.createPane('pane_ZE_OCCITANIE_pop2019_1');
